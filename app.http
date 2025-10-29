@@ -1,0 +1,137 @@
+
+
+# Base URL
+@baseUrl = http://localhost:3000
+
+### Root endpoint
+GET {{baseUrl}}/
+
+//Metrics endpoint
+###
+GET {{baseUrl}}/metrics
+
+//API DOCUMENTATION ENDPOINT
+###
+GET {{baseUrl}}/api
+
+
+# ======AUTH TESTING ENDPOINTS=====
+
+### Create a new user
+POST {{baseUrl}}/api/auth/register
+Content-Type: application/json
+
+{
+  "first_name": "Micheal",
+  "last_name": "Ngigi",
+  "email": "Micheal@outlook.com",
+  "phone_number": "0732270830",
+  "password": "adminpass",
+  "user_type": "customer"
+  
+}
+
+### Admin Login
+POST {{baseUrl}}/api/auth/login
+Content-Type: application/json
+Authorization: bear eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo5LCJmaXJzdF9uYW1lIjoiTWljaGVhbCIsImxhc3RfbmFtZSI6Ik5naWdpIiwiZW1haWwiOiJNaWNoZWFsQG91dGxvb2suY29tIiwidXNlcl90eXBlIjoiY3VzdG9tZXIiLCJpYXQiOjE3NjE3Njg1ODYsImV4cCI6MTc2MTc3MjE4Nn0.isLAWqZoeL4o-_Xh-K3y5IyNRSyB--SsaocO5_N8Ry8
+
+{
+  "email": "Micheal@outlook.com",
+  "password": "adminpass"
+}
+
+### user login
+POST {{baseUrl}}/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "denis@gmail.com",
+  "password": "password123"
+}
+
+
+
+### Update user
+PUT {{baseUrl}}/api/users/2
+Content-Type: application/json
+
+{
+  "first_name": "denis",
+  "last_name": "kathuri",
+  "email": "denis@gmail.com",
+  "phone_number": "0723356478",
+  "password": "password123"
+}
+
+
+
+# ### Unhashed Users
+# POST {{baseUrl}}/api/auth/login
+# Content-Type: application/json
+
+# {
+#   "email": "brian@gmail.com",
+#   "password": "password123"
+# }
+
+
+###
+# USER ENDPOINTS
+
+### Get all users
+GET {{baseUrl}}/api/users
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo5LCJmaXJzdF9uYW1lIjoiTWljaGVhbCIsImxhc3RfbmFtZSI6Ik5naWdpIiwiZW1haWwiOiJNaWNoZWFsQG91dGxvb2suY29tIiwidXNlcl90eXBlIjoiYWRtaW4iLCJpYXQiOjE3NjE3Njg5NTcsImV4cCI6MTc2MTc3MjU1N30.CFwbq9jhk6hGBNt6ZdkauFDoBa3XZWVdSAN-xCmdLos
+
+
+### Get user by ID
+GET {{baseUrl}}/api/users/2
+
+
+
+### Delete user
+DELETE {{baseUrl}}/api/users/5
+
+###Restaurant checking End points
+
+###Get all Restaurants
+
+GET {{baseUrl}}/api/restaurants
+
+###Get Restaurant By ID
+
+GET {{baseUrl}}/api/restaurants/1
+
+###Create a new restaurant
+
+POST {{baseUrl}}/api/restaurants
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo5LCJmaXJzdF9uYW1lIjoiTWljaGVhbCIsImxhc3RfbmFtZSI6Ik5naWdpIiwiZW1haWwiOiJNaWNoZWFsQG91dGxvb2suY29tIiwidXNlcl90eXBlIjoiYWRtaW4iLCJpYXQiOjE3NjE3NzYxNDQsImV4cCI6MTc2MTc3OTc0NH0.ddzWuWUyMsoGXd_BJFah77Msg9jU4luSYVFc3SyJE7Q
+
+{
+    "name": "Burger Hub",
+    "description": "Juicy burgers",
+    "address": "789 Burger Rd",
+    "city": "Mombasa",
+    "phone_number": "0712345678",
+    "email": "burger@hub.com",
+    "opening_time": "08:00:00",
+    "closing_time": "23:00:00",
+    "cuisine_type": "American"
+  }
+###Update an existing restaurant
+
+PUT {{baseUrl}}/api/restaurants/:2
+
+###Delete a restaurant
+
+DELETE {{baseUrl}}/api/restaurants/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo5LCJmaXJzdF9uYW1lIjoiTWljaGVhbCIsImxhc3RfbmFtZSI6Ik5naWdpIiwiZW1haWwiOiJNaWNoZWFsQG91dGxvb2suY29tIiwidXNlcl90eXBlIjoiYWRtaW4iLCJpYXQiOjE3NjE3NzYxNDQsImV4cCI6MTc2MTc3OTc0NH0.ddzWuWUyMsoGXd_BJFah77Msg9jU4luSYVFc3SyJE7Q
+
+
+
+
+
+
+
+
