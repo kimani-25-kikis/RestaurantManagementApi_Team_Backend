@@ -1,88 +1,97 @@
-import { getDbPool } from '../db/db.config.ts';
-import sql from 'mssql';
+import { getDbPool } from "../db/db.config.ts";
 
-/* ---------- READ ---------- */
+// Fetch all restaurants
 export const getAllRestaurants = async () => {
   const pool = await getDbPool();
   const result = await pool.request().query(`
-    SELECT restaurant_id, name, description, address, city,
-           phone_number, email, opening_time, closing_time,
-           cuisine_type, is_active
-    FROM Restaurants
+    SELECT * FROM Restaurants 
+    ORDER BY restaurant_id DESC
   `);
   return result.recordset;
 };
 
-export const getRestaurantById = async (restaurant_id: number) => {
+// Fetch single restaurant by ID
+export const getRestaurantById = async (restaurantId: number) => {
   const pool = await getDbPool();
   const result = await pool
     .request()
-    .input('restaurant_id', sql.Int, restaurant_id)
-    .query(`
-      SELECT restaurant_id, name, description, address, city,
-             phone_number, email, opening_time, closing_time,
-             cuisine_type, is_active
-      FROM Restaurants
-      WHERE restaurant_id = @restaurant_id
-    `);
+    .input("restaurant_id", restaurantId)
+    .query("SELECT * FROM Restaurants WHERE restaurant_id = @restaurant_id");
 
-  return result.recordset[0] ?? null;
+  return result.recordset[0];
 };
 
-/* ---------- CREATE ---------- */
+// Create new restaurant
 export const createRestaurant = async (data: any) => {
   const pool = await getDbPool();
   const {
-    name, description, address, city,
-    phone_number, email, opening_time,
-    closing_time, cuisine_type,
+    name,
+    description,
+    address,
+    city,
+    phone_number,
+    email,
+    opening_time,
+    closing_time,
+    cuisine_type,
+    is_active = 1,
   } = data;
 
-  await pool
+  const result = await pool
     .request()
-    .input('name', sql.NVarChar, name)
-    .input('description', sql.NVarChar, description)
-    .input('address', sql.NVarChar, address)
-    .input('city', sql.NVarChar, city)
-    .input('phone_number', sql.NVarChar, phone_number)
-    .input('email', sql.NVarChar, email)
-    .input('opening_time', sql.Time, opening_time)
-    .input('closing_time', sql.Time, closing_time)
-    .input('cuisine_type', sql.NVarChar, cuisine_type)
+    .input("name", name)
+    .input("description", description)
+    .input("address", address)
+    .input("city", city)
+    .input("phone_number", phone_number)
+    .input("email", email)
+    .input("opening_time", opening_time)
+    .input("closing_time", closing_time)
+    .input("cuisine_type", cuisine_type)
+    .input("is_active", is_active)
     .query(`
-      INSERT INTO Restaurants
-        (name, description, address, city, phone_number,
-         email, opening_time, closing_time, cuisine_type)
-      VALUES
-        (@name, @description, @address, @city, @phone_number,
-         @email, @opening_time, @closing_time, @cuisine_type)
+      INSERT INTO Restaurants 
+        (name, description, address, city, phone_number, email, opening_time, closing_time, cuisine_type, is_active)
+      OUTPUT INSERTED.*
+      VALUES 
+        (@name, @description, @address, @city, @phone_number, @email, @opening_time, @closing_time, @cuisine_type, @is_active)
     `);
+
+  return result.recordset[0];
 };
 
-/* ---------- UPDATE ---------- */
-export const updateRestaurant = async (restaurant_id: number, data: any) => {
+// Update restaurant
+export const updateRestaurant = async (restaurantId: number, data: any) => {
   const pool = await getDbPool();
   const {
-    name, description, address, city,
-    phone_number, email, opening_time,
-    closing_time, cuisine_type, is_active,
+    name,
+    description,
+    address,
+    city,
+    phone_number,
+    email,
+    opening_time,
+    closing_time,
+    cuisine_type,
+    is_active,
   } = data;
 
-  await pool
+  const result = await pool
     .request()
-    .input('restaurant_id', sql.Int, restaurant_id)
-    .input('name', sql.NVarChar, name)
-    .input('description', sql.NVarChar, description)
-    .input('address', sql.NVarChar, address)
-    .input('city', sql.NVarChar, city)
-    .input('phone_number', sql.NVarChar, phone_number)
-    .input('email', sql.NVarChar, email)
-    .input('opening_time', sql.Time, opening_time)
-    .input('closing_time', sql.Time, closing_time)
-    .input('cuisine_type', sql.NVarChar, cuisine_type)
-    .input('is_active', sql.Bit, is_active)
+    .input("restaurant_id", restaurantId)
+    .input("name", name)
+    .input("description", description)
+    .input("address", address)
+    .input("city", city)
+    .input("phone_number", phone_number)
+    .input("email", email)
+    .input("opening_time", opening_time)
+    .input("closing_time", closing_time)
+    .input("cuisine_type", cuisine_type)
+    .input("is_active", is_active)
     .query(`
-      UPDATE Restaurants SET
+      UPDATE Restaurants
+      SET 
         name = @name,
         description = @description,
         address = @address,
@@ -95,13 +104,17 @@ export const updateRestaurant = async (restaurant_id: number, data: any) => {
         is_active = @is_active
       WHERE restaurant_id = @restaurant_id
     `);
+
+  return result.rowsAffected[0] > 0;
 };
 
-/* ---------- DELETE ---------- */
-export const deleteRestaurant = async (restaurant_id: number) => {
+// Delete restaurant
+export const deleteRestaurant = async (restaurantId: number) => {
   const pool = await getDbPool();
-  await pool
+  const result = await pool
     .request()
-    .input('restaurant_id', sql.Int, restaurant_id)
-    .query('DELETE FROM Restaurants WHERE restaurant_id = @restaurant_id');
+    .input("restaurant_id", restaurantId)
+    .query("DELETE FROM Restaurants WHERE restaurant_id = @restaurant_id");
+
+  return result.rowsAffected[0] > 0;
 };

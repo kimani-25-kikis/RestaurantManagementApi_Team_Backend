@@ -1,16 +1,16 @@
-import { Hono } from 'hono';
-import * as ctrl from '../restaurants/restaurant.controllers.ts';
-import { adminRoleAuth } from '../middleware/bearAuth.ts';
+import { Hono } from "hono";
+import * as restaurantControllers from "./restaurant.controllers.ts";
+import { adminRoleAuth } from "../middleware/bearAuth.ts";
 
 const restaurantRoutes = new Hono();
 
-/* ----- PUBLIC READ ----- */
-restaurantRoutes.get('/restaurants', ctrl.getAllRestaurants);
-restaurantRoutes.get('/restaurants/:id', ctrl.getRestaurantById);
+// 🟢 Public route
+restaurantRoutes.get("/restaurants/:restaurant_id", restaurantControllers.getRestaurantById);
 
-/* ----- ADMIN ONLY ----- */
-restaurantRoutes.post('/restaurants', adminRoleAuth, ctrl.createRestaurant);
-restaurantRoutes.put('/restaurants/:id', adminRoleAuth, ctrl.updateRestaurant);
-restaurantRoutes.delete('/restaurants/:id', adminRoleAuth, ctrl.deleteRestaurant);
+// 🔐 Admin-only routes
+restaurantRoutes.get("/restaurants", adminRoleAuth, restaurantControllers.getAllRestaurants);
+restaurantRoutes.post("/restaurants", adminRoleAuth, restaurantControllers.createRestaurant);
+restaurantRoutes.put("/restaurants/:restaurant_id", adminRoleAuth, restaurantControllers.updateRestaurant);
+restaurantRoutes.delete("/restaurants/:restaurant_id", adminRoleAuth, restaurantControllers.deleteRestaurant);
 
 export default restaurantRoutes;

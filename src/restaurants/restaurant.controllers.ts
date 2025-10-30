@@ -1,63 +1,84 @@
-import type { Context } from 'hono';
-import {
-  getAllRestaurants as getAllRestaurantsService,
-  getRestaurantById as getRestaurantByIdService,
-  createRestaurant as createRestaurantService,
-  updateRestaurant as updateRestaurantService,
-  deleteRestaurant as deleteRestaurantService,
-} from '../restaurants/restaurants.service.ts';
+import type { Context } from "hono";
+import * as restaurantService from "../restaurants/restaurants.service.ts";
 
-export const getAllRestaurants = async (c: Context): Promise<Response> => {
-  const restaurants = await getAllRestaurantsService();
-  return c.json(restaurants, 200);
-};
-
-export const getRestaurantById = async (c: Context): Promise<Response> => {
+// Get all restaurants (Admin only)
+export const getAllRestaurants = async (c: Context) => {
   try {
-    const id = Number(c.req.param('id'));
+    const restaurants = await restaurantService.getAllRestaurants();
+    return c.json(restaurants, 200);
+  } catch (error: any) {
+    console.error("Error fetching restaurants:", error.message);
+    return c.json({ error: "Failed to fetch restaurants" }, 500);
+  }
+};
 
-    if (isNaN(id)) {
-      return c.json({ error: 'Invalid restaurant ID' }, 400);
-    }
+// Get restaurant by ID
+export const getRestaurantById = async (c: Context) => {
+  const restaurantId = Number(c.req.param("restaurant_id"));
 
-    const restaurant = await getRestaurantByIdService(id);
+  if (isNaN(restaurantId)) {
+    return c.json({ error: "Invalid restaurant ID" }, 400);
+  }
+
+  try {
+    const restaurant = await restaurantService.getRestaurantById(restaurantId);
     if (!restaurant) {
-      return c.json({ error: 'Restaurant not found' }, 404);
+      return c.json({ error: "Restaurant not found" }, 404);
     }
-
     return c.json(restaurant, 200);
-  } catch (err) {
-    console.error('getRestaurantById error:', err);
-    return c.json({ error: 'Failed to fetch restaurant' }, 500);
+  } catch (error: any) {
+    console.error("Error fetching restaurant:", error.message);
+    return c.json({ error: "Failed to fetch restaurant" }, 500);
   }
 };
-const normalizeTime = (time: string): string => {
-  if (!time) return time;
-  // Add :00 if missing
-  if (time.match(/^\d{1,2}:\d{2}$/)) {
-    return `${time.padStart(5, '0')}:00`; // "9:30" → "09:30:00"
+
+// Create restaurant (Admin only)
+export const createRestaurant = async (c: Context) => {
+  try {
+    const data = await c.req.json();
+    const result = await restaurantService.createRestaurant(data);
+    return c.json({ message: "Restaurant created successfully", restaurant: result }, 201);
+  } catch (error: any) {
+    console.error("Error creating restaurant:", error.message);
+    return c.json({ error: "Failed to create restaurant" }, 500);
   }
-  if (time.match(/^\d{1,2}:\d{2}:\d{2}$/)) {
-    return time.padStart(8, '0'); // "9:30:00" → "09:30:00"
+};
+
+// Update restaurant (Admin only)
+export const updateRestaurant = async (c: Context) => {
+  const restaurantId = Number(c.req.param("restaurant_id"));
+  if (isNaN(restaurantId)) {
+    return c.json({ error: "Invalid restaurant ID" }, 400);
   }
-  return time;
+
+  try {
+    const data = await c.req.json();
+    const updated = await restaurantService.updateRestaurant(restaurantId, data);
+    if (!updated) {
+      return c.json({ error: "Restaurant not found" }, 404);
+    }
+    return c.json({ message: "Restaurant updated successfully" }, 200);
+  } catch (error: any) {
+    console.error("Error updating restaurant:", error.message);
+    return c.json({ error: "Failed to update restaurant" }, 500);
+  }
 };
 
-export const createRestaurant = async (c: Context): Promise<Response> => {
-  const body = await c.req.json();
-  await createRestaurantService(body);
-  return c.json({ message: 'Restaurant created successfully' }, 201);
-};
+// Delete restaurant (Admin only)
+export const deleteRestaurant = async (c: Context) => {
+  const restaurantId = Number(c.req.param("restaurant_id"));
+  if (isNaN(restaurantId)) {
+    return c.json({ error: "Invalid restaurant ID" }, 400);
+  }
 
-export const updateRestaurant = async (c: Context): Promise<Response> => {
-  const id = Number(c.req.param('id'));
-  const body = await c.req.json();
-  await updateRestaurantService(id, body);
-  return c.json({ message: 'Restaurant updated successfully' }, 200);
-};
-
-export const deleteRestaurant = async (c: Context): Promise<Response> => {
-  const id = Number(c.req.param('id'));
-  await deleteRestaurantService(id);
-  return c.json({ message: 'Restaurant deleted successfully' }, 200);
+  try {
+    const deleted = await restaurantService.deleteRestaurant(restaurantId);
+    if (!deleted) {
+      return c.json({ error: "Restaurant not found" }, 404);
+    }
+    return c.json({ message: "Restaurant deleted successfully" }, 200);
+  } catch (error: any) {
+    console.error("Error deleting restaurant:", error.message);
+    return c.json({ error: "Failed to delete restaurant" }, 500);
+  }
 };
