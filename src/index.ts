@@ -26,9 +26,8 @@ app.use(limiter);
 // Root endpoint
 app.get('/', (c) => {
   return c.json({
-    message: 'Hono.js API Server',
-    documentation: 'Visit /api for available endpoints',
-    status: 'running'
+    message: 'Kimani Restaurant'
+    
   });
 });
 

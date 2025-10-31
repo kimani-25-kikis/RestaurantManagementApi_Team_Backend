@@ -24,8 +24,8 @@ export const Config = {
     sqlConfig: {
         user: SQL_USER ,
         password: SQL_PASSWORD ,
-        server: SQL_SERVER ,
-        database: SQL_DATABASE ,
+        server: SQL_SERVER,
+        database: SQL_DATABASE,
         connectionTimeout: 15000,
         requestTimeout: 15000,
         pool: {
