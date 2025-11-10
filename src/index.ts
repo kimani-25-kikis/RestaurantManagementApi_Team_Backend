@@ -8,6 +8,8 @@ import { prometheus } from '@hono/prometheus';
 import { limiter } from './middleware/rateLimiter.ts';
 import authRoutes from './auth/auth.routes.ts';
 import restaurantRoutes from './restaurants/restaurant.routes.ts';
+import MenuItemRoutes from './Menu/MenuItem.routes.ts';
+import OrderItemRoutes from './orderitem/orderitem.routes.ts';
 
 const app = new Hono();
 
@@ -52,9 +54,11 @@ app.notFound((c: Context) => {
 
 // Mount API routes
 // app.route("/api", todoRoutes);
-app.route("/api", userRoutes);
-app.route("/api", authRoutes);
-app.route("/api", restaurantRoutes);
+app.route("api", userRoutes);
+app.route("api", authRoutes);
+app.route("api", restaurantRoutes);
+app.route("api", MenuItemRoutes); 
+app.route("api", OrderItemRoutes);
 
 const port = Number(process.env.PORT) || 3000;
 

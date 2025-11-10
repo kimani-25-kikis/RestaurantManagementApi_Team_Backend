@@ -64,7 +64,7 @@ CREATE TABLE Orders (
     restaurant_id INT NOT NULL,
     customer_id INT NOT NULL,
     order_type NVARCHAR(20) NOT NULL,
-    status NVARCHAR(20) NOT NULL,
+    status NVARCHAR(20) DEFAULT = 'Pending' NOT NULL,
     total_amount DECIMAL(10,2) NOT NULL,
     created_at DATETIME2 DEFAULT GETDATE(),
 

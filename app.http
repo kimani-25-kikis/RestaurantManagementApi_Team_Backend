@@ -1,5 +1,4 @@
 
-
 # Base URL
 @baseUrl = http://localhost:3000
 
@@ -18,21 +17,20 @@ GET {{baseUrl}}/api
 # ======AUTH TESTING ENDPOINTS=====
 
 ### Create a new user
-POST {{baseUrl}}/api/auth/register
+POST http://localhost:3000/api/auth/register
 Content-Type: application/json
 
 {
-  "first_name": "Micheal",
-  "last_name": "Ngigi",
-  "email": "Micheal@outlook.com",
-  "phone_number": "0732270830",
-  "password": "adminpass",
+  "first_name": "John",
+  "last_name": "Doe",
+  "email": "john@example.com",
+  "phone_number": "0712345678",
+  "password": "123456",
   "user_type": "customer"
-  
 }
 
 ### Admin Login
-POST {{baseUrl}}/api/auth/login
+POST http://localhost:3000/api/auth/login
 Content-Type: application/json
 Authorization: bear eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo5LCJmaXJzdF9uYW1lIjoiTWljaGVhbCIsImxhc3RfbmFtZSI6Ik5naWdpIiwiZW1haWwiOiJNaWNoZWFsQG91dGxvb2suY29tIiwidXNlcl90eXBlIjoiY3VzdG9tZXIiLCJpYXQiOjE3NjE3Njg1ODYsImV4cCI6MTc2MTc3MjE4Nn0.isLAWqZoeL4o-_Xh-K3y5IyNRSyB--SsaocO5_N8Ry8
 
@@ -42,7 +40,7 @@ Authorization: bear eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo5LCJmaXJ
 }
 
 ### user login
-POST {{baseUrl}}/api/auth/login
+POST http://localhost:3000/api/auth/login
 Content-Type: application/json
 
 {
@@ -53,7 +51,7 @@ Content-Type: application/json
 
 
 ### Update user
-PUT {{baseUrl}}/api/users/2
+PUT http://localhost:3000/api/users/2
 Content-Type: application/json
 
 {
@@ -80,7 +78,7 @@ Content-Type: application/json
 # USER ENDPOINTS
 
 ### Get all users
-GET {{baseUrl}}/api/users
+GET http://localhost:3000/api/MenuItem
 Authorization: Bearer 
 
 
@@ -148,8 +146,78 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo5LCJma
 
 
 
+### get all orderitem
+GET {{baseUrl}}/api/OrderItem
+
+### get orderitem by id
+GET {{baseUrl}}/api/OrderItem/10
+
+### create  orderitem
+POST {{baseUrl}}/api/OrderItem
+Content-Type: application/json
+
+{
+ 
+
+ "order_id": "2",
+  "menu_item_id": "7",
+  "quantity": "3",
+  "unit_price": "10.12",
+  "total_price": "30"
+}
+
+### Update OrderItem
+PUT {{baseUrl}}/api/OrderItem/44
+Content-Type: application/json
+
+{
+  
+  "order_id": "2",
+  "menu_item_id": "6",
+  "quantity": "3",
+  "unit_price": "10.12",
+  "total_price": "30"
+}
 
 
+### Delete orderitem 
+DELETE {{baseUrl}}/api/OrderItem/6
 
 
+//menuitem endpoint
+
+### get all MenuItem
+GET {{baseUrl}}/api/MenuItem
+
+### get MenuItem by id
+GET {{baseUrl}}/api/MenuItem/6
+
+### Create MenuItem
+POST {{baseUrl}}/api/MenuItem
+Content-Type: application/json
+
+{
+  "restaurant_id": "2",
+  "category_id": "3",
+  "name": "piza",
+  "description": "its sweet",
+  "price": "20.10",
+  "is_available": "1"
+}
+
+
+### update  MenuItem
+PuT {{baseUrl}}/api/MenuItem/7
+
+{
+     "restaurant_id": "2",
+  "category_id": "3",
+  "name": "piza",
+  "description": "its sweet",
+  "price": "20.10",
+  "is_available": "1"
+}
+
+### Delete MenuItem 
+DELETE {{baseUrl}}/api/MenuItem/9
 
