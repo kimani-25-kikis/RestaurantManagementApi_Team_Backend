@@ -147,9 +147,78 @@ DELETE {{baseUrl}}/api/restaurants/3
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo2LCJmaXJzdF9uYW1lIjoiTWljaGVhbCIsImxhc3RfbmFtZSI6Ik5naWdpIiwiZW1haWwiOiJNaWNoZWFsQG91dGxvb2suY29tIiwidXNlcl90eXBlIjoiYWRtaW4iLCJpYXQiOjE3NjE5MTI3ODYsImV4cCI6MTc2MTkxNjM4Nn0.pubbOQAs2tiO3FDkS0bI2DU2QKxglZVb7PneoXaqd8o
 
 
+//========ENDPOINTS FOR ORDERS=========
+
+###  Get all orders
+GET {{baseUrl}}/api/orders
+
+
+###  Get order by ID
+GET {{baseUrl}}/api/orders/1
+
+
+### Create new order
+POST {{baseUrl}}/api/orders
+Content-Type: application/json
+
+{
+  "restaurant_id": 2,
+  "customer_id": 1,
+  "order_type": "food",
+  "status": "Pending",
+  "total_amount": 1800
+}
+
+
+###  Update order
+PUT {{baseUrl}}/api/orders/1
+Content-Type: application/json
+
+{
+    "customer_id": 1,
+  "order_type": "Pickup",
+  "status": "Completed",
+  "total_amount": 950
+}
+
+
+###  Delete order
+DELETE {{baseUrl}}/api/orders/1
 
 
 
 
+# =======================
+#      CATEGORIES ENDPOINTS
+# =======================
 
+###  Get all categories
+GET {{baseUrl}}/api/categories
 
+###  Get category by ID
+GET {{baseUrl}}/api/categories/3
+
+### Create new category
+POST {{baseUrl}}/api/categories
+Content-Type: application/json
+
+{
+  "restaurant_id": 2,
+  "name": "Beverages",
+  "description": "Soft drinks and juices",
+  "is_active": true
+}
+
+###  Update category
+PUT {{baseUrl}}/api/categories/1
+Content-Type: application/json
+
+{
+  "restaurant_id": 2,
+  "name": "Hot Beverages",
+  "description": "Coffee and tea",
+  "is_active": true
+}
+
+###  Delete category
+DELETE {{baseUrl}}/api/categories/3
