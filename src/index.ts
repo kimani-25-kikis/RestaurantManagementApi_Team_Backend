@@ -10,6 +10,8 @@ import authRoutes from './auth/auth.routes.ts';
 import restaurantRoutes from './restaurants/restaurant.routes.ts';
 import MenuItemRoutes from './Menu/MenuItem.routes.ts';
 import OrderItemRoutes from './orderitem/orderitem.routes.ts';
+import CategoryRoutes from './Categories/Categories.routes.ts';
+import OrdersRoutes from './Orders/Orders.routes.ts';
 
 const app = new Hono();
 
@@ -28,9 +30,8 @@ app.use(limiter);
 // Root endpoint
 app.get('/', (c) => {
   return c.json({
-    message: 'Hono.js API Server',
-    documentation: 'Visit /api for available endpoints',
-    status: 'running'
+    message: 'Kimani Restaurant'
+    
   });
 });
 
@@ -59,6 +60,12 @@ app.route("api", authRoutes);
 app.route("api", restaurantRoutes);
 app.route("api", MenuItemRoutes); 
 app.route("api", OrderItemRoutes);
+app.route("/api", userRoutes);
+app.route("/api", authRoutes);
+app.route("/api", restaurantRoutes);
+app.route("/api", OrdersRoutes);
+app.route("/api", CategoryRoutes);
+
 
 const port = Number(process.env.PORT) || 3000;
 

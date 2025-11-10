@@ -9,7 +9,7 @@ GET {{baseUrl}}/
 ###
 GET {{baseUrl}}/metrics
 
-//API DOCUMENTATION ENDPOINT
+
 ###
 GET {{baseUrl}}/api
 
@@ -27,6 +27,13 @@ Content-Type: application/json
   "phone_number": "0712345678",
   "password": "123456",
   "user_type": "customer"
+  "first_name": "Micheal",
+  "last_name": "Ngigi",
+  "email": "Micheal@outlook.com",
+  "phone_number": "07973470830",
+  "password": "adminpass",
+  "user_type": "admin"
+  
 }
 
 ### Admin Login
@@ -80,6 +87,8 @@ Content-Type: application/json
 ### Get all users
 GET http://localhost:3000/api/MenuItem
 Authorization: Bearer 
+GET {{baseUrl}}/api/users
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo2LCJmaXJzdF9uYW1lIjoiTWljaGVhbCIsImxhc3RfbmFtZSI6Ik5naWdpIiwiZW1haWwiOiJNaWNoZWFsQG91dGxvb2suY29tIiwidXNlcl90eXBlIjoiYWRtaW4iLCJpYXQiOjE3NjE5MTI3ODYsImV4cCI6MTc2MTkxNjM4Nn0.pubbOQAs2tiO3FDkS0bI2DU2QKxglZVb7PneoXaqd8o
 
 
 ### Get user by ID
@@ -95,7 +104,7 @@ DELETE {{baseUrl}}/api/users/5
 ###Get all Restaurants
 
 GET {{baseUrl}}/api/restaurants
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo5LCJmaXJzdF9uYW1lIjoiTWljaGVhbCIsImxhc3RfbmFtZSI6Ik5naWdpIiwiZW1haWwiOiJNaWNoZWFsQG91dGxvb2suY29tIiwidXNlcl90eXBlIjoiYWRtaW4iLCJpYXQiOjE3NjE4MDc0NTYsImV4cCI6MTc2MTgxMTA1Nn0.H8ELLmNAbUOMc-qpD7h9cQn6cNzi0QQoT9xY4v2nUy0
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo2LCJmaXJzdF9uYW1lIjoiTWljaGVhbCIsImxhc3RfbmFtZSI6Ik5naWdpIiwiZW1haWwiOiJNaWNoZWFsQG91dGxvb2suY29tIiwidXNlcl90eXBlIjoiYWRtaW4iLCJpYXQiOjE3NjE5MTI3ODYsImV4cCI6MTc2MTkxNjM4Nn0.pubbOQAs2tiO3FDkS0bI2DU2QKxglZVb7PneoXaqd8o
 
 ###Get Restaurant By ID
 
@@ -105,7 +114,7 @@ GET {{baseUrl}}/api/restaurants/1
 
 POST {{baseUrl}}/api/restaurants
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo5LCJmaXJzdF9uYW1lIjoiTWljaGVhbCIsImxhc3RfbmFtZSI6Ik5naWdpIiwiZW1haWwiOiJNaWNoZWFsQG91dGxvb2suY29tIiwidXNlcl90eXBlIjoiYWRtaW4iLCJpYXQiOjE3NjE4MDc0NTYsImV4cCI6MTc2MTgxMTA1Nn0.H8ELLmNAbUOMc-qpD7h9cQn6cNzi0QQoT9xY4v2nUy0
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo2LCJmaXJzdF9uYW1lIjoiTWljaGVhbCIsImxhc3RfbmFtZSI6Ik5naWdpIiwiZW1haWwiOiJNaWNoZWFsQG91dGxvb2suY29tIiwidXNlcl90eXBlIjoiYWRtaW4iLCJpYXQiOjE3NjE5MTI3ODYsImV4cCI6MTc2MTkxNjM4Nn0.pubbOQAs2tiO3FDkS0bI2DU2QKxglZVb7PneoXaqd8o
 
 {
   "name": "The safari park",
@@ -121,9 +130,9 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo5LCJma
 
 ###Update an existing restaurant
 
-PUT {{baseUrl}}/api/restaurants/4
+PUT {{baseUrl}}/api/restaurants/3
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo5LCJmaXJzdF9uYW1lIjoiTWljaGVhbCIsImxhc3RfbmFtZSI6Ik5naWdpIiwiZW1haWwiOiJNaWNoZWFsQG91dGxvb2suY29tIiwidXNlcl90eXBlIjoiYWRtaW4iLCJpYXQiOjE3NjE4MDc0NTYsImV4cCI6MTc2MTgxMTA1Nn0.H8ELLmNAbUOMc-qpD7h9cQn6cNzi0QQoT9xY4v2nUy0
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo2LCJmaXJzdF9uYW1lIjoiTWljaGVhbCIsImxhc3RfbmFtZSI6Ik5naWdpIiwiZW1haWwiOiJNaWNoZWFsQG91dGxvb2suY29tIiwidXNlcl90eXBlIjoiYWRtaW4iLCJpYXQiOjE3NjE5MTI3ODYsImV4cCI6MTc2MTkxNjM4Nn0.pubbOQAs2tiO3FDkS0bI2DU2QKxglZVb7PneoXaqd8o
 
 {
   "name": "Cafe Bliss Updated",
@@ -141,10 +150,43 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo5LCJma
 
 ###Delete a restaurant
 
-DELETE {{baseUrl}}/api/restaurants/4
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo5LCJmaXJzdF9uYW1lIjoiTWljaGVhbCIsImxhc3RfbmFtZSI6Ik5naWdpIiwiZW1haWwiOiJNaWNoZWFsQG91dGxvb2suY29tIiwidXNlcl90eXBlIjoiYWRtaW4iLCJpYXQiOjE3NjE4MDc0NTYsImV4cCI6MTc2MTgxMTA1Nn0.H8ELLmNAbUOMc-qpD7h9cQn6cNzi0QQoT9xY4v2nUy0
+DELETE {{baseUrl}}/api/restaurants/3
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo2LCJmaXJzdF9uYW1lIjoiTWljaGVhbCIsImxhc3RfbmFtZSI6Ik5naWdpIiwiZW1haWwiOiJNaWNoZWFsQG91dGxvb2suY29tIiwidXNlcl90eXBlIjoiYWRtaW4iLCJpYXQiOjE3NjE5MTI3ODYsImV4cCI6MTc2MTkxNjM4Nn0.pubbOQAs2tiO3FDkS0bI2DU2QKxglZVb7PneoXaqd8o
 
 
+//========ENDPOINTS FOR ORDERS=========
+
+###  Get all orders
+GET {{baseUrl}}/api/orders
+
+
+###  Get order by ID
+GET {{baseUrl}}/api/orders/1
+
+
+### Create new order
+POST {{baseUrl}}/api/orders
+Content-Type: application/json
+
+{
+  "restaurant_id": 2,
+  "customer_id": 1,
+  "order_type": "food",
+  "status": "Pending",
+  "total_amount": 1800
+}
+
+
+###  Update order
+PUT {{baseUrl}}/api/orders/1
+Content-Type: application/json
+
+{
+    "customer_id": 1,
+  "order_type": "Pickup",
+  "status": "Completed",
+  "total_amount": 950
+}
 
 ### get all orderitem
 GET {{baseUrl}}/api/OrderItem
@@ -178,6 +220,8 @@ Content-Type: application/json
   "unit_price": "10.12",
   "total_price": "30"
 }
+###  Delete order
+DELETE {{baseUrl}}/api/orders/1
 
 
 ### Delete orderitem 
@@ -221,3 +265,37 @@ PuT {{baseUrl}}/api/MenuItem/7
 ### Delete MenuItem 
 DELETE {{baseUrl}}/api/MenuItem/9
 
+# =======================
+#      CATEGORIES ENDPOINTS
+# =======================
+
+###  Get all categories
+GET {{baseUrl}}/api/categories
+
+###  Get category by ID
+GET {{baseUrl}}/api/categories/3
+
+### Create new category
+POST {{baseUrl}}/api/categories
+Content-Type: application/json
+
+{
+  "restaurant_id": 2,
+  "name": "Beverages",
+  "description": "Soft drinks and juices",
+  "is_active": true
+}
+
+###  Update category
+PUT {{baseUrl}}/api/categories/1
+Content-Type: application/json
+
+{
+  "restaurant_id": 2,
+  "name": "Hot Beverages",
+  "description": "Coffee and tea",
+  "is_active": true
+}
+
+###  Delete category
+DELETE {{baseUrl}}/api/categories/3

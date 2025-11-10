@@ -5,7 +5,6 @@ dotenv.config(); // Loads the environment variables from .env file
 
 
 
-
 const { SQL_USER, SQL_PASSWORD, SQL_SERVER, SQL_PORT, SQL_DATABASE } = process.env; // Destructure environment variables
 
 //Ensure that the environment variables are defined
@@ -19,13 +18,13 @@ assert(SQL_DATABASE, 'SQL_DATABASE is not defined in environment variables');
 //MSSQL Database Configuration
 
 // Configuration object for the database connection
-const Config = {
+export const Config = {
     // Local SQL Server Express with computer name and instance name
     port: SQL_PORT,
     sqlConfig: {
-        user: SQL_USER,
-        password: SQL_PASSWORD,
-         server: SQL_SERVER,
+        user: SQL_USER ,
+        password: SQL_PASSWORD ,
+        server: SQL_SERVER,
         database: SQL_DATABASE,
         connectionTimeout: 15000,
         requestTimeout: 15000,
