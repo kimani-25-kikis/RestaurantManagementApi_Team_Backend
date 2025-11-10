@@ -9,9 +9,11 @@ CREATE TABLE Users (
     phone_number NVARCHAR(15),
     password NVARCHAR(255) NOT NULL,
     user_type NVARCHAR DEFAULT(20) NOT NULL,
+    user_type NVARCHAR(20) NOT NULL DEFAULT 'customer',
     created_at DATETIME2 DEFAULT GETDATE(),
     updated_at DATETIME2
 );
+
 
 -- RESTAURANTS TABLE
 CREATE TABLE Restaurants (
