@@ -23,7 +23,7 @@ export const getOrderById = async (c: Context) => {
     const order_id = parseInt(c.req.param('order_id'));
 
     try {
-        const result = await OrdersServices.getOdersById(order_id);
+        const result = await OrdersServices.getOrderById(order_id);
 
         if (result === null) {
             return c.json({ error: 'Order not found' }, 404);
@@ -70,7 +70,7 @@ export const updateOrder = async (c: Context) => {
         const order_id = parseInt(c.req.param('order_id'));
         const body = await c.req.json();
 
-        const checkExists = await OrdersServices.getOdersById(order_id);
+        const checkExists = await OrdersServices.getOrderById(order_id);
 
         if (checkExists === null) {
             return c.json({ error: 'Order not found' }, 404);
@@ -98,13 +98,13 @@ export const deleteOrder = async (c: Context) => {
     const order_id = parseInt(c.req.param('order_id'));
 
     try {
-        const check = await OrdersServices.getOdersById(order_id);
+        const check = await OrdersServices.getOrderById(order_id);
 
         if (check === null) {
             return c.json({ error: 'Order not found' }, 404);
         }
 
-        const result = await OrdersServices.deleteorder(order_id);
+        const result = await OrdersServices.deleteOrder(order_id);
 
         return c.json({ message: 'Order deleted successfully', deleted_Order: result }, 200);
 

@@ -5,10 +5,6 @@
 ### Root endpoint
 GET {{baseUrl}}/
 
-//Metrics endpoint
-###
-GET {{baseUrl}}/metrics
-
 
 ###
 GET {{baseUrl}}/api
@@ -39,7 +35,7 @@ Content-Type: application/json
 ### Admin Login
 POST http://localhost:3000/api/auth/login
 Content-Type: application/json
-Authorization: bear eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo5LCJmaXJzdF9uYW1lIjoiTWljaGVhbCIsImxhc3RfbmFtZSI6Ik5naWdpIiwiZW1haWwiOiJNaWNoZWFsQG91dGxvb2suY29tIiwidXNlcl90eXBlIjoiY3VzdG9tZXIiLCJpYXQiOjE3NjE3Njg1ODYsImV4cCI6MTc2MTc3MjE4Nn0.isLAWqZoeL4o-_Xh-K3y5IyNRSyB--SsaocO5_N8Ry8
+
 
 {
   "email": "Micheal@outlook.com",
@@ -68,28 +64,6 @@ Content-Type: application/json
   "phone_number": "0723356478",
   "password": "password123"
 }
-
-
-
-# ### Unhashed Users
-# POST {{baseUrl}}/api/auth/login
-# Content-Type: application/json
-
-# {
-#   "email": "brian@gmail.com",
-#   "password": "password123"
-# }
-
-
-###
-# USER ENDPOINTS
-
-### Get all users
-GET http://localhost:3000/api/MenuItem
-Authorization: Bearer 
-GET {{baseUrl}}/api/users
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo2LCJmaXJzdF9uYW1lIjoiTWljaGVhbCIsImxhc3RfbmFtZSI6Ik5naWdpIiwiZW1haWwiOiJNaWNoZWFsQG91dGxvb2suY29tIiwidXNlcl90eXBlIjoiYWRtaW4iLCJpYXQiOjE3NjE5MTI3ODYsImV4cCI6MTc2MTkxNjM4Nn0.pubbOQAs2tiO3FDkS0bI2DU2QKxglZVb7PneoXaqd8o
-
 
 ### Get user by ID
 GET {{baseUrl}}/api/users/2
@@ -161,7 +135,7 @@ GET {{baseUrl}}/api/orders
 
 
 ###  Get order by ID
-GET {{baseUrl}}/api/orders/1
+GET {{baseUrl}}/api/orders/2
 
 
 ### Create new order
@@ -169,7 +143,7 @@ POST {{baseUrl}}/api/orders
 Content-Type: application/json
 
 {
-  "restaurant_id": 2,
+  "restaurant_id": 3,
   "customer_id": 1,
   "order_type": "food",
   "status": "Pending",
@@ -228,7 +202,6 @@ DELETE {{baseUrl}}/api/orders/1
 DELETE {{baseUrl}}/api/OrderItem/6
 
 
-//menuitem endpoint
 
 ### get all MenuItem
 GET {{baseUrl}}/api/MenuItem
@@ -298,4 +271,4 @@ Content-Type: application/json
 }
 
 ###  Delete category
-DELETE {{baseUrl}}/api/categories/3
+DELETE {{baseUrl}}/api/categories/1

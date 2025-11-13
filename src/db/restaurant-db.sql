@@ -42,6 +42,16 @@ CREATE TABLE Categories (
 
     CONSTRAINT FK_Categories_Restaurants 
         FOREIGN KEY (restaurant_id) REFERENCES Restaurants(restaurant_id)
+
+        --Run this on the mssql
+ALTER TABLE Categories
+DROP CONSTRAINT FK_Categories_Restaurants;
+
+ALTER TABLE Categories
+ADD CONSTRAINT FK_Categories_Restaurants
+FOREIGN KEY (restaurant_id) REFERENCES Restaurants(restaurant_id)
+ON DELETE CASCADE;
+
 );
 
 -- MENUITEMS TABLE
@@ -60,6 +70,17 @@ CREATE TABLE MenuItems (
 
     CONSTRAINT FK_MenuItems_Categories 
         FOREIGN KEY (category_id) REFERENCES Categories(category_id)
+
+    --Update the MenuItem using this
+
+    ALTER TABLE MenuItems
+DROP CONSTRAINT FK_MenuItems_Categories;
+
+ALTER TABLE MenuItems
+ADD CONSTRAINT FK_MenuItems_Categories
+FOREIGN KEY (category_id) REFERENCES Categories(category_id)
+ON DELETE CASCADE;
+
 );
 
 -- ORDERS TABLE
@@ -78,6 +99,16 @@ CREATE TABLE Orders (
     CONSTRAINT FK_Orders_Users 
         FOREIGN KEY (customer_id) REFERENCES Users(user_id)
 );
+
+--Update this in the orders
+ALTER TABLE OrderItems
+DROP CONSTRAINT FK_OrderItems_MenuItems;
+
+ALTER TABLE OrderItems
+ADD CONSTRAINT FK_OrderItems_MenuItems
+FOREIGN KEY (menu_item_id) REFERENCES MenuItems(menu_item_id)
+ON DELETE CASCADE;
+
 
 -- ORDERITEMS TABLE
 CREATE TABLE OrderItems (
