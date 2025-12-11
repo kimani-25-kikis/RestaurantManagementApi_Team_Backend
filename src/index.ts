@@ -12,8 +12,10 @@ import MenuItemRoutes from './Menu/MenuItem.routes.ts';
 import OrderItemRoutes from './orderitem/orderitem.routes.ts';
 import CategoryRoutes from './Categories/Categories.routes.ts';
 import OrdersRoutes from './Orders/Orders.routes.ts';
+import { cors } from 'hono/cors';
 
 const app = new Hono();
+app.use('*',cors());
 
 //prometheus middleware
 const {printMetrics, registerMetrics} =  prometheus()

@@ -7,10 +7,10 @@ const authRoutes = new Hono()
 
 
 // Register new user
-authRoutes.post('/auth/register', authControllers.createUser)
+authRoutes.post('/register', authControllers.createUser)
 
 // Login user
-authRoutes.post('/auth/login', authControllers.loginUser )
+authRoutes.post('/login', authControllers.loginUser )
 
 
 

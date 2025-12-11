@@ -53,7 +53,7 @@ export const getAllOrders = async (): Promise<OrderResponse[]> => {
             u.email AS customer_email,
             u.phone_number AS customer_phone
 
-        FROM Orders o
+        FROM OrdersTable o
         INNER JOIN Restaurants r ON o.restaurant_id = r.restaurant_id
         INNER JOIN Users u ON o.customer_id = u.user_id
         ORDER BY o.created_at DESC
@@ -110,7 +110,7 @@ export const getOrderById = async (order_id: number): Promise<OrderResponse | nu
             u.email AS customer_email,
             u.phone_number AS customer_phone
 
-        FROM Orders o
+        FROM OrdersTable o
         INNER JOIN Restaurants r ON o.restaurant_id = r.restaurant_id
         INNER JOIN Users u ON o.customer_id = u.user_id
         WHERE o.order_id = @order_id
@@ -154,21 +154,19 @@ export const createOrder = async (
     restaurant_id: number,
     customer_id: number,
     order_type: string,
-    status: string,
     total_amount: number
 ): Promise<string> => {
     const db = getDbPool();
 
     const query = `
-        INSERT INTO Orders (restaurant_id, customer_id, order_type, status, total_amount)
-        VALUES (@restaurant_id, @customer_id, @order_type, @status, @total_amount)
+        INSERT INTO OrdersTable (restaurant_id, customer_id, order_type, total_amount)
+        VALUES (@restaurant_id, @customer_id, @order_type, @total_amount)
     `;
 
     const result = await db.request()
         .input("restaurant_id", restaurant_id)
         .input("customer_id", customer_id)
         .input("order_type", order_type)
-        .input("status", status)
         .input("total_amount", total_amount)
         .query(query);
 
@@ -189,7 +187,7 @@ export const updateOrder = async (
     const db = getDbPool();
 
     const query = `
-        UPDATE Orders 
+        UPDATE OrdersTable 
         SET restaurant_id=@restaurant_id,
             customer_id=@customer_id,
             order_type=@order_type,
@@ -214,7 +212,7 @@ export const updateOrder = async (
 export const deleteOrder = async (order_id: number): Promise<string> => {
     const db = getDbPool();
 
-    const query = "DELETE FROM Orders WHERE order_id=@order_id";
+    const query = "DELETE FROM OrdersTable WHERE order_id=@order_id";
 
     const result = await db.request()
         .input("order_id", order_id)

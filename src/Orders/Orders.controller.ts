@@ -42,9 +42,9 @@ export const createOrder = async (c: Context) => {
     try {
         const body = await c.req.json();
 
-        const { restaurant_id, customer_id, order_type, status, total_amount } = body;
+        const { restaurant_id, customer_id, order_type, total_amount } = body;
 
-        if (!restaurant_id || !customer_id || !order_type || !status || !total_amount) {
+        if (!restaurant_id || !customer_id || !order_type || !total_amount) {
             return c.json({ error: "All fields are required" }, 400);
         }
 
@@ -52,7 +52,6 @@ export const createOrder = async (c: Context) => {
             restaurant_id,
             customer_id,
             order_type,
-            status,
             total_amount
         );
 

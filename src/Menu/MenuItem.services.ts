@@ -26,9 +26,11 @@ export interface MenuItemResponse {
   price: number;
   is_available: boolean;
   created_at?: Date;
+  menuitem_image_url:string;
+  quantity:number;
 
   restaurant: RestaurantInfo;
-  category: CategoryInfo;
+ category: CategoryInfo;
 }
 
 // GET ALL MENU ITEMS
@@ -45,6 +47,9 @@ export const getAllMenuItems = async (): Promise<MenuItemResponse[]> => {
       m.price,
       m.is_available,
       m.created_at,
+      m. menuitem_image_url,
+      m.quantity,
+     
 
       r.name AS restaurant_name,
       r.description AS restaurant_description,
@@ -66,32 +71,7 @@ export const getAllMenuItems = async (): Promise<MenuItemResponse[]> => {
 
   const result = await db.request().query(query);
 
-  return result.recordset.map((row: any) => ({
-    menu_item_id: row.menu_item_id,
-    name: row.menu_item_name,
-    description: row.menu_item_description,
-    price: row.price,
-    is_available: row.is_available,
-    created_at: row.created_at,
-
-    restaurant: {
-      restaurant_id: row.restaurant_id,
-      name: row.restaurant_name,
-      description: row.restaurant_description,
-      address: row.restaurant_address,
-      city: row.restaurant_city,
-      phone_number: row.restaurant_phone,
-      email: row.restaurant_email,
-      cuisine_type: row.restaurant_cuisine_type,
-    },
-
-    category: {
-      category_id: row.category_id,
-      name: row.category_name,
-      description: row.category_description,
-      is_active: row.category_is_active,
-    },
-  }));
+  return result.recordset;
 };
 
 // GET SINGLE MENU ITEM BY ID
@@ -142,6 +122,8 @@ export const getMenuItemById = async (menu_item_id: number): Promise<MenuItemRes
     price: row.price,
     is_available: row.is_available,
     created_at: row.created_at,
+    menuitem_image_url:row.menuitem_image_url,
+    quantity:row.quantity,
 
     restaurant: {
       restaurant_id: row.restaurant_id,
@@ -202,7 +184,9 @@ export const updateMenuItem = async (
     name: string;
     description?: string;
     price: number;
-    is_available?: boolean;
+    menuitem_image_url:string;
+    quantity:number;
+
   }
 ): Promise<MenuItemResponse | null> => {
   const db = await getDbPool();
@@ -215,7 +199,8 @@ export const updateMenuItem = async (
       name = @name,
       description = @description,
       price = @price,
-      is_available = @is_available
+      menuitem_image_url=@menuitem_image_url,
+      quantity=@quantity
     WHERE menu_item_id = @menu_item_id
   `;
 
@@ -226,7 +211,8 @@ export const updateMenuItem = async (
     .input("name", data.name)
     .input("description", data.description || "")
     .input("price", data.price)
-    .input("is_available", data.is_available ?? 1)
+    .input("menuitem_image_url",data.menuitem_image_url)
+    .input("quantity",data.quantity)
     .query(query);
 
   return await getMenuItemById(menu_item_id);
